@@ -8,14 +8,14 @@ This program takes in 2 numbers, separated by a space, per line until the end of
 
 #### Example
 
-Input: 
-10 12
-5 6
-11 8
-Output: 
-2
-1
-3
+- Input: 
+    - 10 12
+    - 5 6
+    - 11 8
+- Output: 
+    - 2
+    - 1
+    - 3
 
 ### Files
 
