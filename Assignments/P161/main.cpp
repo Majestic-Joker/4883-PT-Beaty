@@ -19,14 +19,14 @@ int main(){
     //create array of light cycles 'lightCycles' of size 110, 110 is enough to hold all cycle data
     int lightCycles[110];
     int count = 0;
-    int longestCycle = 0;
+    int shortestCycle = 999;
     //loop as long as incoming cycle data is greater than 0
     while(inData){
       //put cycle data in array 'lightCycles'
       lightCycles[count] = inData;
       //store largest cycle data
-      if(inData > longestCycle)
-        longestCycle = inData;
+      if(inData < shortestCycle)
+        shortestCycle = inData;
       //grab next cycle data
       cin >> inData;
       //increase count for array filling purposes
@@ -34,7 +34,7 @@ int main(){
     }
     //create an int for current time in seconds
     //don't need to start at 0 since we need to wait until the longest light turns green again
-    int currentSecond = (longestCycle*2);
+    int currentSecond = (shortestCycle*2);
     //create a boolean for synchrony
     bool inSync = false;
     //while time is less than 18000 seconds or five hours
