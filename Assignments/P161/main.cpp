@@ -24,7 +24,7 @@ int main(){
     while(inData){
       //put cycle data in array 'lightCycles'
       lightCycles[count] = inData;
-      //store largest cycle data
+      //store shortest cycle data
       if(inData < shortestCycle)
         shortestCycle = inData;
       //grab next cycle data
