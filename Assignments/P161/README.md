@@ -24,12 +24,12 @@ Write a program that determines how long it will be before all the lights are gr
 |   1   | [main.cpp](./main.cpp)     | solution file.                                             |
 |   2   | [input](./input)           | Test input file from problem statement                     |
 |   3   | [input2](./input2)         | Test input file from uDebug user UVA Judge                 |
-|   4   | [input3](./input3)         | Two incorrect cases from input2, working on them           |
+|   4   | [input3](./input3)         | Two initially incorrect cases from input2, solved by editing start time           |
 
 
 ### Instructions
 
-- .
+- This solution was accepted by UVA Judge using C++ 11
 
 ### Sources
 
