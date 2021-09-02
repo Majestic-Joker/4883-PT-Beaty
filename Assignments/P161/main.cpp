@@ -33,7 +33,7 @@ int main(){
       count++;
     }
     //create an int for current time in seconds
-    //don't need to start at 0 since we need to wait until the longest light turns green again
+    //don't need to start at 0 data doesn't matter until shortest light turns green again.
     int currentSecond = (shortestCycle*2);
     //create a boolean for synchrony
     bool inSync = false;
