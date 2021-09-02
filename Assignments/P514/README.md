@@ -38,7 +38,7 @@ In between each block of output, a blank line is output
 
 ### Instructions
 
-- This project was accepted by UVA Judge using C++ 11
+- .
 
 ### Sources
 
