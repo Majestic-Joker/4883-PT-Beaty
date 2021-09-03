@@ -6,6 +6,16 @@ On a given street there are 2 to 100 traffic lights with green light cycles betw
 
 Write a program that determines how long it will be before all the lights are green again. The timer begins as soon as all the lights show green. Output will be in the **hh:mm:ss** format unless the time takes longer than 5 hours in which case the output will be *"Signals fail to synchronise in 5 hours"*.
 
+#### Why this problem is Relevant
+
+Finding a situation where stoplights are all green, even for a second, seemed a little pointless to me and I
+nearly categorized this as just a competition or interview question. However, I gave it some thought and
+realized that similar logic could be used to figure out when asynchronous clock cycles match up.
+Varying levels of cache memory sometime operate faster or slower than their corresponding processors and
+especially the main memory. Instead of sending a write signal as soon as possible, a given cache could wait
+until the main memory is able to use the write signal. This would free up the main signal bus and improve
+performance by preventing unnecessary signals from being sent.
+
 #### Example
 
 - Input: 
