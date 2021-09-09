@@ -2,7 +2,7 @@
 ### Joshua Beaty
 ### Description:
 
-A Jolly Jumper is a list of numbers where the absolute values of the difference between each pair of numbers contains every number from 1 to n-1. 
+A Jolly Jumper is a list of numbers where the absolute values of the difference between each pair of numbers contains every number from 1 to n-1. n = 1 is automatically a jolly jumper. 
 
 #### Example
 
@@ -19,9 +19,7 @@ A Jolly Jumper is a list of numbers where the absolute values of the difference 
 | :---: | -------------------------- | ---------------------------------------------------------- |
 |   1   | [main.cpp](./main.cpp)     | solution file.                                             |
 |   2   | [input](./input)           | Test input file from problem statement                     |
-|   3   | [input2](./input2)         | Test input file from uDebug user UVA Judge                 |
-|   4   | [input3](./input3)         | Two initially incorrect cases from input2, solved by editing start time|
-
+|   3   | [input2](./input2)         | Test input file from uDebug user uDebug                    |
 
 ### Instructions
 
