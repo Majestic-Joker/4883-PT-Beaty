@@ -8,3 +8,4 @@
 |   4   | [P10055](https://github.com/Majestic-Joker/4883-PT-Beaty/tree/main/Assignments/P10055) | Register for UVA Judge, Solve UVA problem 10055 |
 |   5   | [P161](./P161) | Solve UVA problem 161 - Traffic Lights |
 |   6   | [P10038](./p10038) | Solve UVA problem 10038 - Jolly Jumpers |
+|   7   | [P10038](./P11080) | Solve UVA problem 11080 - Place the Guards |
