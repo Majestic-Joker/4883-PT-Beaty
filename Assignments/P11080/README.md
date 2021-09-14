@@ -40,3 +40,5 @@ A king has terrible guards that fight each other when they guard the same street
     - [Bipartite Graph](https://www.geeksforgeeks.org/bipartite-graph/) explains what a bipartite graph is and basic steps
     to figure out if a graph is bipartite. While is does provide code, I am attempting to not use it and just implement 
     the basic steps using what I know.
+    - [For Each](https://www.geeksforgeeks.org/g-fact-40-foreach-in-c-and-java/) looked up the syntax to use a foreach
+    loop in C++
