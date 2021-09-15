@@ -25,10 +25,10 @@ A king has terrible guards that fight each other when they guard the same street
 
 |   #   | File                       | Description                                                |
 | :---: | -------------------------- | ---------------------------------------------------------- |
-|   1   | [main.cpp](./main.cpp)     | solution file.                                             |
-|   2   | [input](./input)           | Test input file from problem statement                     |
-|   3   | [input2](./input2)         | Larger test input from udebug user brianfry713             |
-
+|   1   | [main.cpp](./main.cpp)     | My solution file, still need to work out edge cases        |
+|   2   | [geek.cpp](./geek.cpp)     | solution file from starter code that Dr. Griffin supplied to the class         |
+|   3   | [input](./input)           | Test input file from problem statement                     |
+|   4   | [input2](./input2)         | Larger test input from udebug user brianfry713             |
 
 ### Instructions
 
