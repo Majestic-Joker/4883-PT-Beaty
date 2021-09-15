@@ -5,7 +5,7 @@
 #include <cstdio>
 #include <cstring>
 #include <iostream>
-#include <fstream>
+//#include <fstream>
 #include <map>
 #include <queue>
 #include <stack>
@@ -124,8 +124,8 @@ bool isBipartite() {
 
 int main(int argc, char **argv) {
     bool isitreallybipartite;
-    ofstream fout;
-    fout.open("geekOutput");
+    //ofstream fout;
+    //fout.open("geekOutput");
     cin >> T;
 
     while (T--) {
@@ -172,14 +172,14 @@ int main(int argc, char **argv) {
             output = -1;
         }
         else{
-            if(E == 0){
+            if(E == 0){                             //if no edges
                 output = V;
             }
             else{
                 int count1 = 0;
                 int count0 = 0;
 
-                for(int c : colors){
+                for(int c : colors){                //counting to find smallest set
                     //cout << c;
                     if(c > 0)
                         count1++;
@@ -203,7 +203,7 @@ int main(int argc, char **argv) {
                     output = count0;
                 }
 
-                if(count0!=count1)
+                if(count0!=count1)                  //finds disjointed nodes
                     REP(b, V){
                         if(hasConnections[b] == 0)
                         output++;
@@ -214,7 +214,7 @@ int main(int argc, char **argv) {
         colors.clear();
 
         cout << output << endl;
-        fout << output << endl;
+        //fout << output << endl;
     }
 
     return 0;
