@@ -29,10 +29,11 @@ A king has terrible guards that fight each other when they guard the same street
 |   2   | [geek.cpp](./geek.cpp)     | solution file from starter code that Dr. Griffin supplied to the class         |
 |   3   | [input](./input)           | Test input file from problem statement                     |
 |   4   | [input2](./input2)         | Larger test input from udebug user brianfry713             |
+|   5   | [input3](./input3)         | Alternative test input from udebug user Ahmad_Elsagheer    |
 
 ### Instructions
 
-- This project was accepted by UVA Judge using C++ 11
+- run using one of the inputs
 
 ### Sources
 
