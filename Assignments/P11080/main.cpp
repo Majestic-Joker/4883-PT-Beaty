@@ -28,6 +28,8 @@ struct Node{
 };
 
 int main() {
+    //ios_base::sync_with_stdio(false);
+    //cin.tie(NULL);
     ofstream fOut;
     ofstream debug;
     fOut.open("testOutput.txt");
@@ -97,36 +99,80 @@ int main() {
 
             vector<Node*> left;
             vector<Node*> right;
-
+            int smallSide = 0;
             if(debugMode)
                 debug << "\n==Sorting Junctions==\n";
             //look at every node in junctions
-            for(Node* n : junctions){
-
+            for(auto n : junctions){
                 //if no neighbors, it doesn't get placed, and minGuards gets incremented
                 if(n->totalNeighbors == 0){
                     minGuards++;
                     if(debugMode)
                         debug << n->name << " has no neighbors, gets no side, minGuards incremented\n";
                 }
-                //if n hasn't been given a side, 
-                else if(!n->placed){
+                //if n hasn't been given a side and sides are even or left is smaller
+                else if(!n->placed && smallSide<=1){
+                    //place n on the smaller side
                     left.push_back(n);
                     n->side = 1;
                     n->placed = true;
                     if(debugMode)
                         debug << n->name << " goes on the left side.\n";
                     //for every neighbor n has, put them on the right side if they haven't already been placed
-                    for(Node* c : n->neighbors){
-                        if(!c->placed){
-                            right.push_back(c);
-                            c->side = 2;
-                            c->placed = true;
+                    for(auto a : n->neighbors){
+                        if(!a->placed){
+                            right.push_back(a);
+                            a->side = 2;
+                            a->placed = true;
                             if(debugMode)
-                                debug << c->name << " goes on the right side.\n";
+                                debug << a->name << " goes on the right side.\n";
+                            //for every neighbor a has, put them on the left side if they haven't already been placed
+                            for(auto b : a->neighbors){
+                                if(!b->placed){
+                                    left.push_back(b);
+                                    b->side = 1;
+                                    b->placed = true;
+                                    if(debugMode)
+                                        debug << b->name << " goes on the left side.\n";
+                                }
+                            }
                         }
                     }
                 }
+                //if n hasn't been given a side and right is smaller
+                else if(!n->placed && smallSide>1){
+                    //place n on the smaller side
+                    right.push_back(n);
+                    n->side = 2;
+                    n->placed = true;
+                    if(debugMode)
+                        debug << n->name << " goes on the right side.\n";
+                    //for every neighbor n has, put them on the left side if they haven't already been placed
+                    for(auto a : n->neighbors){
+                        if(!a->placed){
+                            left.push_back(a);
+                            a->side = 1;
+                            a->placed = true;
+                            if(debugMode)
+                                debug << a->name << " goes on the left side.\n";
+                            //for every neighbor a has, put them on the right side if they haven't already been placed
+                            for(auto b : a->neighbors){
+                                if(!b->placed){
+                                    right.push_back(b);
+                                    b->side = 2;
+                                    b->placed = true;
+                                    if(debugMode)
+                                        debug << b->name << " goes on the right side.\n";
+                                }
+                            }
+                        }
+                    }
+                }
+                //set small side
+                if(left.size()<=right.size())
+                    smallSide = 1;
+                else
+                    smallSide = 2;
             }
 
 
@@ -134,10 +180,10 @@ int main() {
                 debug << "\n==Checking for connected nodes on left side==\n";
             bool sameSideFound = false;
             //for every node in left, check if its neighbors are also on the left.
-            for(Node* l : left){
+            for(auto l : left){
                 if(sameSideFound)
                     break;
-                for(Node* ln : l->neighbors){
+                for(auto ln : l->neighbors){
                     if(l->side == ln->side){
                         sameSideFound = true;
                         if(debugMode){
@@ -153,10 +199,10 @@ int main() {
                 debug << "\n==Checking for connected nodes on right side==\n";
             //then check right side
             //for every node in left, check if its neighbors are also on the left.
-            for(Node* r : right){
+            for(auto r : right){
                 if(sameSideFound)
                     break;
-                for(Node* rn : r->neighbors){
+                for(auto rn : r->neighbors){
                     if(r->side == rn->side){
                         sameSideFound = true;
                         if(debugMode){
