@@ -30,6 +30,10 @@ A king has terrible guards that fight each other when they guard the same street
 |   3   | [input](./input)           | Test input file from problem statement                     |
 |   4   | [input2](./input2)         | Larger test input from udebug user brianfry713             |
 |   5   | [input3](./input3)         | Alternative test input from udebug user Ahmad_Elsagheer    |
+|   6   | [input4](./input4)         | Alternative test input from udebug user _8Ampere           |
+|   7   | [input5](./input5)         | Alternative test input from udebug user s6088              |
+|   8   | [input6](./input6)         | Alternative test input from udebug user s6088              |
+|   9   | [input7](./input7)         | Alternative test input from udebug user s6088              |
 
 ### Instructions
 
