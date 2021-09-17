@@ -68,6 +68,8 @@ int main() {
             vector<Node*> junctions;
             int countJ = totalJunctions;
             while(countJ--){
+                if(debugMode)
+                    debug << (totalJunctions-countJ)-1 << '\n';
                 //create basic node and push it on the vector 'junctions'
                 Node* temp = new Node();
                 temp->name = (totalJunctions-countJ)-1;
@@ -87,14 +89,19 @@ int main() {
                 int t = 0;
                 cin >> f;
                 cin >> t;
-                //push t onto the list of f's neighbors and f onto the list of t's neighbors
-                junctions[f]->neighbors.push_back(junctions[t]);
-                junctions[t]->neighbors.push_back(junctions[f]);
-                //increment total neighbors of the node, any node with totalNeighbors = 0 is disjointed and adds to minGuards
-                junctions[f]->totalNeighbors++;
-                junctions[t]->totalNeighbors++;
-                if(debugMode)
-                    debug << "Street " << (totalStreets-countS)-1 << " connects junction " << f << " to junction " << t << "\n";
+                
+                //skip if f=t;
+                if(f!=t){
+                    //push t onto the list of f's neighbors and f onto the list of t's neighbors
+                    junctions[f]->neighbors.push_back(junctions[t]);
+                    junctions[t]->neighbors.push_back(junctions[f]);
+                    //increment total neighbors of the node, any node with totalNeighbors = 0 is disjointed and adds to minGuards
+                    junctions[f]->totalNeighbors++;
+                    junctions[t]->totalNeighbors++;
+
+                    if(debugMode)
+                        debug << "Street " << (totalStreets-countS)-1 << " connects junction " << f << " to junction " << t << "\n";
+                }  
             }
 
             vector<Node*> left;
@@ -238,13 +245,11 @@ int main() {
             }
         }
 
-        
-
         if(debugMode)
                 debug << "+++Answer is: " << minGuards << "\n\n";
         else{
             cout << minGuards << '\n';
-            //fOut << minGuards << '\n';
+            fOut << minGuards << '\n';
         }
     }
     fOut.close();
