@@ -6,10 +6,62 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <queue>
 
 using namespace std;
 
 bool debugMode = false;
+
+//A butchered Geeks for Geeks method to check bipartiteness.
+//takes in the vector of Node pointers
+bool isBipartite(vector<Node*> adj)
+{
+    // queue for BFS storing {vertex , colour}
+    queue<pair<int, int>> q;
+
+    //loop incase graph is not connected
+    for (int i = 0; i < adj.size(); i++) {
+    
+        //if not connected
+        if(adj[i]->totalNeighbors >0)
+            //if not coloured
+            if (!adj[i]->placed) {
+            
+                //colouring with 0 i.e. red
+                q.push({ i, 0 });
+                adj[i]->side = 0;
+            
+                while (!q.empty()) {
+                    pair<int, int> p = q.front();
+                    q.pop();
+                
+                    //current vertex
+                    int v = p.first;
+                    //colour of current vertex
+                    int c = p.second;
+                
+                    //traversing vertexes connected to current vertex
+                    for (Node* n : adj[i]->neighbors) {
+                
+                        //if already coloured with parent vertex color
+                        //then bipartite graph is not possible
+                        if (n->side == c)
+                            return 0;
+                    
+                        //if uncooloured
+                        if (n->side == -1) {
+                            //colouring with opposite color to that of parent
+                            n->side = (c) ? 0 : 1;
+                            q.push({ n->name, n->side });
+                    }
+                }
+            }
+        }
+    }
+    //if all vertexes are coloured such that
+      //no two connected vertex have same colours
+    return 1;
+}
 
 //created a struct to keep track of some basic information.
 struct Node{
@@ -22,7 +74,7 @@ struct Node{
     Node(){
         totalNeighbors = 0;
         name = 0;
-        side = 0;
+        side = -1;
         placed = false;
     }
 };
