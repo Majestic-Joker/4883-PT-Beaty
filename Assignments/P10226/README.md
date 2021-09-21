@@ -4,6 +4,8 @@
 
 Forests are big and have many tree species. A satellite flies over head and provides an input for each tree species in a given forest one species per line. Write a program that reads in the data and determines the percentage of every species listed in a test case.
 
+While it's possible to get the correct answer using vectors and nodes, it's too slow for UVA to accept it so a map will be required to get an accepted solution from UVA online judge.
+
 #### Example
 
 - Input: 
@@ -67,9 +69,11 @@ Forests are big and have many tree species. A satellite flies over head and prov
 
 |   #   | File                       | Description                                                |
 | :---: | -------------------------- | ---------------------------------------------------------- |
-|   1   | [main.cpp](./main.cpp)     | solution file.                                             |
-|   2   | [input](./input)           | Test input file from problem statement                     |
-|   3   | [input2](./input2)         | Larger test input from udebug user udebug                  |
+|   1   | [main.cpp](./main.cpp)     | First solution file, correct answer, but too slow for UVA  |
+|   2   | [main2.cpp](./main2.cpp)   | Second solution file using map                             |
+|   3   | [input](./input)           | Test input file from problem statement                     |
+|   4   | [input2](./input2)         | Larger test input from udebug user shimul_cseustc          |
+|   5   | [input3](./input3)         | Alternative test input from udebug user brianfry713        |
 
 ### Instructions
 
@@ -77,4 +81,5 @@ Forests are big and have many tree species. A satellite flies over head and prov
 
 ### Sources
 
-- None so far.
+- Geeks for Geeks
+    -[Maps in C++](https://www.geeksforgeeks.org/map-associative-containers-the-c-standard-template-library-stl/) explains how maps associate a key with data. Since the key can be a string it was pretty useful for this problem.

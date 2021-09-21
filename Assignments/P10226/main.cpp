@@ -36,8 +36,6 @@ struct SortTreeNodePointers
 bool debugMode = false;
 
 int main(){
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
     //initialize some stuff
     ofstream fout, debug;
     fout.open("test.out");
