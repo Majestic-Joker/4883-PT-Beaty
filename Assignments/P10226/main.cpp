@@ -1,16 +1,15 @@
 #include<iostream>
-#include<vector>
 #include<fstream>
+#include<vector>
+#include<algorithm>
 #include<iomanip>
 #include<string>
-#include<algorithm>
 
 using namespace std;
 
 struct treeNode{
     string species;
     int count;
-    double percentage;
 
     treeNode(){
         species = "";
@@ -37,27 +36,46 @@ struct SortTreeNodePointers
 bool debugMode = false;
 
 int main(){
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
     //initialize some stuff
     ofstream fout, debug;
     fout.open("test.out");
-    vector<treeNode*> vTrees;
-    int totalTrees = 0;
     int cases = 0;
-    int dump;
+    string dump;
 
     cin >> cases;
-    cin >> dump;
-    while(cases--){
+    int countCase = cases;
+    if(debugMode)
+        cout << "Cases: " << cases << '\n';
+
+    //dump first empty line
+    getline(cin, dump);
+    if(debugMode)
+        cout << "dump is : " << dump << '\n';
+    //loop while there are active cases
+    while(countCase--){
+        if(debugMode)
+            cout << "Case " << cases-countCase << " started.\n";
+
+        int totalTrees = 0;
+        int count = 0;
         string lineIn;
+        vector<treeNode*> vTrees;
         while(getline(cin, lineIn)){
+            if(totalTrees == 0 && lineIn.size() == 0)
+                continue;
+            else if(lineIn.size() == 0)
+                break;
+            
             //if vector is empty no need to check
-            if(vTrees.empty()){
+            /*if(vTrees.empty()){
                 treeNode* temp = new treeNode();
                 temp->species = lineIn;
-                temp->count++;
+                temp->count++; 
                 vTrees.push_back(temp);    
                 totalTrees++;
-            }
+            }*/
 
             //if vector isn't empty compare line in to the currently stored species
             bool isFound = false;
@@ -78,20 +96,26 @@ int main(){
                 vTrees.push_back(temp);    
                 totalTrees++;
             }
-                
+
+            count++;
         }
         //figure out the percentage of each tree
         //first sort the tree vector
         sort(vTrees.begin(), vTrees.end(), SortTreeNodePointers());
 
+        if(debugMode){
+            cout << "Total Trees: " << totalTrees << '\n';
+            cout << "Run times: " << count << '\n';
+        }
+
         for(treeNode* t : vTrees){
-            cout << t->species << ' ' << ((double)t->count/totalTrees) << '\n';
-            fout << t->species << ' ' << ((double)t->count/totalTrees) << '\n';
+            cout << t->species << ' ' << setprecision(4) << fixed << ((double)t->count/totalTrees)*100 << '\n';
+            fout << t->species << ' ' << setprecision(4) << fixed << ((double)t->count/totalTrees)*100 << '\n';
         }
 
         cout << '\n';
-        cout << '\n';
-        cin >> dump;
+        fout << '\n';
     }
 
+    fout.close();
 }
