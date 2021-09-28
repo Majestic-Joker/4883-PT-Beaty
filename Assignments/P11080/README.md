@@ -34,7 +34,11 @@ A king has terrible guards that fight each other when they guard the same street
 |   7   | [input5](./input5)         | Alternative test input from udebug user s6088              |
 |   8   | [input6](./input6)         | Alternative test input from udebug user s6088              |
 |   9   | [input7](./input7)         | Alternative test input from udebug user s6088              |
-
+|   10  | [input8](./input8)         | Alternative test input from me                             |
+|   11  | [input9](./input9)         | Alternative test input from me                             |
+|   12  | [input10](./input10)       | Alternative test input from me                             |
+|   13  | [input11](./input11)       | Alternative test input from me                             |
+|   14  | [input12](./input12)       | Alternative test input from me                             |
 ### Instructions
 
 - run using one of the inputs
