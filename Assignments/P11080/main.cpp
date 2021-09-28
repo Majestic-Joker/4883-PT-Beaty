@@ -12,8 +12,26 @@ using namespace std;
 
 bool debugMode = false;
 
+//created a struct to keep track of some basic information.
+struct Node{
+    int totalNeighbors;
+    int name;
+    int side;
+    bool placed;
+    vector<Node*> neighbors;
+
+    Node(){
+        totalNeighbors = 0;
+        name = 0;
+        side = -1;
+        placed = false;
+    }
+};
+
 //A butchered Geeks for Geeks method to check bipartiteness.
 //takes in the vector of Node pointers
+
+//+++Not implemented yet+++
 bool isBipartite(vector<Node*> adj)
 {
     // queue for BFS storing {vertex , colour}
@@ -63,25 +81,7 @@ bool isBipartite(vector<Node*> adj)
     return 1;
 }
 
-//created a struct to keep track of some basic information.
-struct Node{
-    int totalNeighbors;
-    int name;
-    int side;
-    bool placed;
-    vector<Node*> neighbors;
-
-    Node(){
-        totalNeighbors = 0;
-        name = 0;
-        side = -1;
-        placed = false;
-    }
-};
-
 int main() {
-    //ios_base::sync_with_stdio(false);
-    //cin.tie(NULL);
     ofstream fOut;
     ofstream debug;
     fOut.open("testOutput.txt");
