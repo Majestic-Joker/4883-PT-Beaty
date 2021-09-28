@@ -42,6 +42,7 @@ int u, v;
 
 vvi G;
 vi colors;
+vi colors2;
 int pos;
 //setup for disjointed nodes
 int hasConnections[201];
@@ -61,6 +62,11 @@ void printColors(){
         cout << colors[i] << " ";
     }
     cout << endl;
+    cout << "colors2: ";
+    REP(i, V) {
+        cout << colors2[i] << " ";
+    }
+    cout << endl;
 }
 
 // colors[1,-1,-1,-1];
@@ -69,61 +75,129 @@ void printColors(){
 
 // This function returns true if
 // graph G[V][V] is Bipartite, else false
-bool isBipartiteUtil(int src) {
-    colors[src] = 1;
+bool isBipartiteUtil(int src, int run) {
+    if(run){
+        //this run counts the colors and start with the smallest one
+        int count0 = 0;
+        int count1 = 0;
+        for(int c: colors)
+            if(c==0)
+                count0++;
+            else if(c==1)
+                count1++;
+        
+        if(count0>=count1)
+            colors[src] = 1;
+        else
+            colors[src] = 0;
 
-    // Create a queue (FIFO) of vertex numbers a
-    // nd enqueue source vertex for BFS traversal
-    queue<int> q;
-    q.push(src);
+        // Create a queue (FIFO) of vertex numbers a
+        // nd enqueue source vertex for BFS traversal
+        queue<int> q;
+        q.push(src);
 
-    // Run while there are vertices in queue (Similar to
-    // BFS)
-    while (!q.empty()) {
-        // Dequeue a vertex from queue ( Refer
-        // http://goo.gl/35oz8 )
-        int u = q.front();
-        q.pop();
+        // Run while there are vertices in queue (Similar to
+        // BFS)
+        while (!q.empty()) {
+            // Dequeue a vertex from queue ( Refer
+            // http://goo.gl/35oz8 )
+            int u = q.front();
+            q.pop();
 
-        // Return false if there is a self-loop
-        if (G[u][u] == 1)
-            return false;
-
-        // Find all non-colored adjacent vertices
-        for (int v = 0; v < V; ++v) {
-            // An edge from u to v exists and
-            // destination v is not colored
-            if (G[u][v] && colors[v] == -1) {
-                // Assign alternate color to this
-                // adjacent v of u
-                colors[v] = 1 - colors[u];
-                q.push(v);
-            }
-
-            // An edge from u to v exists and destination
-            // v is colored with same color as u
-            else if (G[u][v] && colors[v] == colors[u])
+            /*// Return false if there is a self-loop
+            if (G[u][u] == 1)
                 return false;
-        }
-    }
+            */
 
-    // If we reach here, then all adjacent vertices can
-    // be colored with alternate color
-    return true;
+            // Find all non-colored adjacent vertices
+            for (int v = 0; v < V; ++v) {
+                // An edge from u to v exists and
+                // destination v is not colored
+                if (G[u][v] && colors[v] == -1) {
+                    // Assign alternate color to this
+                    // adjacent v of u
+                    colors[v] = 1 - colors[u];
+                    q.push(v);
+                }
+
+                // An edge from u to v exists and destination
+                // v is colored with same color as u
+                else if (G[u][v] && colors[v] == colors[u] && u!=v)
+                    return false;
+            }
+        }
+
+        // If we reach here, then all adjacent vertices can
+        // be colored with alternate color
+        return true;
+    }
+    else{
+        //this run always starts at 1
+        colors2[src] = 1;
+
+        // Create a queue (FIFO) of vertex numbers a
+        // nd enqueue source vertex for BFS traversal
+        queue<int> q;
+        q.push(src);
+
+        // Run while there are vertices in queue (Similar to
+        // BFS)
+        while (!q.empty()) {
+            // Dequeue a vertex from queue ( Refer
+            // http://goo.gl/35oz8 )
+            int u = q.front();
+            q.pop();
+
+            /*// Return false if there is a self-loop
+            if (G[u][u] == 1)
+                return false;
+            */
+            // Find all non-colored adjacent vertices
+            for (int v = 0; v < V; ++v) {
+                // An edge from u to v exists and
+                // destination v is not colored
+                if (G[u][v] && colors2[v] == -1) {
+                    // Assign alternate color to this
+                    // adjacent v of u
+                    colors2[v] = 1 - colors2[u];
+                    q.push(v);
+                }
+
+                // An edge from u to v exists and destination
+                // v is colored with same color as u
+                else if (G[u][v] && colors2[v] == colors2[u] && u!=v)
+                    return false;
+            }
+        }
+
+        // If we reach here, then all adjacent vertices can
+        // be colored with alternate color
+        return true;
+    }
 }
 
 // Returns true if G[][] is Bipartite, else false
-bool isBipartite() {
+bool isBipartite(int r) {
+    if(r){
+        for (int i = 0; i < V; i++){
+            if(hasConnections[i])
+                if (colors[i] == -1)
+                    if (isBipartiteUtil(i,r) == false)
+                        return false;
+        }
 
-    // This code is to handle disconnected graoh
-    for (int i = 0; i < V; i++){
-        if(hasConnections[i])
-            if (colors[i] == -1)
-                if (isBipartiteUtil(i) == false)
-                    return false;
+        return true;
     }
+    else{
+        for (int i = 0; i < V; i++){
+            if(hasConnections[i])
+                if (colors2[i] == -1)
+                    if (isBipartiteUtil(i,r) == false)
+                        return false;
+        }
 
-    return true;
+        return true;
+    }
 }
 
 int main(int argc, char **argv) {
@@ -142,6 +216,7 @@ int main(int argc, char **argv) {
 
         G.resize(V);
         colors.resize(V, -1);
+        colors2.resize(V, -1);
 
         REP(i, V) {
             G[i].resize(V, 0);
@@ -157,48 +232,70 @@ int main(int argc, char **argv) {
             hasConnections[u]++;
             hasConnections[v]++;
         }
-        // printVVI(G);
+        // gives me two versions of colorings
+        isitreallybipartite = isBipartite(0);
+        
+        int smallestColor = 0;
+        //no reason to run it again if the first one wasn't bipartite
+        if(isitreallybipartite){
+            isBipartite(1);
+            //count the colors in each coloring method.
+            int a0 = 0;
+            int a1 = 0;
+            int b0 = 0;
+            int b1 = 0;
+            for(int color = 0; color<colors.size(); color++){
+                if(colors[color]==0)
+                    a0++;
+                else if(colors[color]==1)
+                    a1++;
+                
+                if(colors2[color]==0)
+                    b0++;
+                else if(colors2[color]==1)
+                    b1++;
+            }
+            int smallA = 0;
+            int smallB = 0;
+            if(a0<=a1)
+                smallA = a0;
+            else
+                smallA = a1;
 
-        // 0 = pos
-        // 1 = color count
-        isitreallybipartite = isBipartite();
+            if(b0<=b1)
+                smallB = b0;
+            else
+                smallB = b1;
+
+            if(smallA<=smallB)
+                smallestColor = smallA;
+            else
+                smallestColor = smallB;
+        }
 
         int output = 0;
-
+        output = smallestColor;
 
         if(!isitreallybipartite){
             output = -1;
         }
         else{
-            int count0 = 0;
-            int count1 = 0;
-            int count9 = 0;
+            //printColors();
+            //if a disconnected node is found
             for(int c : colors){
-                if(c>=0){
-                    if(c)
-                        count1++;
-                    else
-                        count0++;
-                }
-                else
-                    count9++;
+                if(c<0)
+                    output++;
             }
-            //by this point, count9 should hold the number of disconnected nodes. 
-            //count1 and count0 should hold a number of bipartiteness.
-            if(count0>=count1)
-                output+=count1;
-            else
-                output+=count0;
-            
-            //then add the number of disconnected nodes
-            output+=count9;
-                  
         }
         G.clear();
         colors.clear();
+        colors2.clear();
+
+        if(V==1)
+            output = 1;
 
         cout << output << endl;
-        //fout << output << endl;
+        fout << output << endl;
     }
 
     return 0;
