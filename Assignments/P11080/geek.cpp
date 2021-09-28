@@ -5,7 +5,7 @@
 #include <cstdio>
 #include <cstring>
 #include <iostream>
-//#include <fstream>
+#include <fstream>
 #include <map>
 #include <queue>
 #include <stack>
@@ -43,6 +43,8 @@ int u, v;
 vvi G;
 vi colors;
 int pos;
+//setup for disjointed nodes
+int hasConnections[201];
 
 void printVVI(vvi graph) {
     REP(i, graph.size()) {
@@ -114,23 +116,23 @@ bool isBipartiteUtil(int src) {
 bool isBipartite() {
 
     // This code is to handle disconnected graoh
-    for (int i = 0; i < V; i++)
-        if (colors[i] == -1)
-            if (isBipartiteUtil(i) == false)
-                return false;
+    for (int i = 0; i < V; i++){
+        if(hasConnections[i])
+            if (colors[i] == -1)
+                if (isBipartiteUtil(i) == false)
+                    return false;
+    }
 
     return true;
 }
 
 int main(int argc, char **argv) {
     bool isitreallybipartite;
-    //ofstream fout;
-    //fout.open("geekOutput");
+    ofstream fout;
+    fout.open("geekOutput");
     cin >> T;
 
     while (T--) {
-        //setup for disjointed nodes
-        int hasConnections[201];
         REP(a,201){
             hasConnections[a] = 0;
         }
@@ -152,13 +154,9 @@ int main(int argc, char **argv) {
             G[v][u] = 1;
 
             //helps determine if a node has connections
-            if(hasConnections[u] == 0)
-                hasConnections[u]++;
-            
-            if(hasConnections[v] == 0)
-                hasConnections[v]++;
+            hasConnections[u]++;
+            hasConnections[v]++;
         }
-
         // printVVI(G);
 
         // 0 = pos
@@ -172,43 +170,29 @@ int main(int argc, char **argv) {
             output = -1;
         }
         else{
-            if(E == 0){                             //if no edges
-                output = V;
-            }
-            else{
-                int count1 = 0;
-                int count0 = 0;
-
-                for(int c : colors){                //counting to find smallest set
-                    //cout << c;
-                    if(c > 0)
+            int count0 = 0;
+            int count1 = 0;
+            int count9 = 0;
+            for(int c : colors){
+                if(c>=0){
+                    if(c)
                         count1++;
-                    else if(c==0)
+                    else
                         count0++;
                 }
-                if(count1 > 0 && count0 > 0)
-                    if(count0 == count1){
-                        output = count0;
-                    }
-                    else if(count1 < count0){
-                        output = count1;
-                    }    
-                    else if(count0 < count1){
-                        output = count0;
-                    }    
-                else if(count1 > 0){
-                    output = count1;
-                }
-                else if(count0 > 0){
-                    output = count0;
-                }
-
-                if(count0!=count1)                  //finds disjointed nodes
-                    REP(b, V){
-                        if(hasConnections[b] == 0)
-                        output++;
-                    }
+                else
+                    count9++;
             }
+            //by this point, count9 should hold the number of disconnected nodes. 
+            //count1 and count0 should hold a number of bipartiteness.
+            if(count0>=count1)
+                output+=count1;
+            else
+                output+=count0;
+            
+            //then add the number of disconnected nodes
+            output+=count9;
+                  
         }
         G.clear();
         colors.clear();
