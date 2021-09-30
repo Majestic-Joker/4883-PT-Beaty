@@ -1,0 +1,18 @@
+Instructions to Interactive Problems
+General Instructions for UVa OJ
+From contestant's perspective, the difference between interactive problems and traditional (batch) problems is that the input to your program (client) is not statically stored in a file: it is produced dynamically by another program (server), and the output of the client is immediately sent to the server, which can be used by the server to compute its next output (which is in turn sent to the client).
+
+For example, in a "guess the number" problem, you're requested to guess an integer between 1 and 1000 in 20 turns. Each time you can ask an integer, the server will tell you whether it's bigger, smaller or exactly same.
+
+In UVa OJ, the client should read from standard input, and write to standard output. The communication between the server and the client is line oriented. That means after printing each line to the standard output, you should flush the output, by calling fflush(stdout) or cout << flush in C/C++, flush(output) in Pascal and System.out.flush() in Java. This way, your output will be sent to the server immediately. The server will also flush the output after each line, but you don't have to read a whole line at a time.
+
+In short, the only important thing you should know is: always flush your output after printing a line. Everything else is the same as traditional problems.
+
+Interactive problems are usually harder to solve, so UVa OJ kindly provides some more verdicts in addition to the traditional ones like AC (Accepted), WA(Wrong Answer) and TLE(Time Limit Exceeded):
+
+BC = Broken Communication
+PV = Protocol Violation
+PLE = Protocol Limit Exceeded
+The first one means the server failed to read a line or write a line, which usually means your program exited presumably. The latter two are defined for each problem separately, which is usually quite intuitive.
+
+Note that servers can exit presumably when there is no need to continue.
