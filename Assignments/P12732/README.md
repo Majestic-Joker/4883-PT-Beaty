@@ -63,5 +63,5 @@ The program answers the test case with the command: Answer 6
 
 ### Sources
 
-- Geeks for Geeks
-    -[Towers of Hanoi](https://www.geeksforgeeks.org/c-program-for-tower-of-hanoi/) provides the recursive solution for this problem. Had to edit it a little to get the right output.
+- UVA Online Judge
+    - [Instructions to Interactive Problems](https://onlinejudge.org/contests/328-9976a2e2/interactive.html) explains how I/O should work for interactive problems.
