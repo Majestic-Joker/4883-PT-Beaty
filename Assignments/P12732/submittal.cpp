@@ -14,15 +14,15 @@ using namespace std;
 void testSection(int sectionSize, int startingIndex)
 {
     //print out command 'Test'
-    cout << "Test ";
+    string output = "Test ";
 
     //print out every number for 2 consecutive sections
     for (int i = startingIndex; i <= ((sectionSize * 2 + startingIndex) - 1); i++)
     {
-        cout << i << " ";
+        output += to_string(i) + " ";
     }
     //flush to send the command to the server
-    fflush(stdout);
+    cout << output << flush;
 }
 
 int main()
@@ -120,6 +120,8 @@ int main()
             }
             numTests++;
         }
+        
+
         cout << "Answer " << fakeCoin << flush;
         caseCount--;
     }

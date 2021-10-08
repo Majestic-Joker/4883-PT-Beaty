@@ -52,14 +52,15 @@ The program answers the test case with the command: Answer 6
 
 ### Files
 
-|   #   | File                       | Description                                                |
-| :---: | -------------------------- | ---------------------------------------------------------- |
-|   1   | [main.cpp](./main.cpp)     | solution file                                              |
+|   #   | File                       | Description                                                       |
+| :---: | -------------------------- | ----------------------------------------------------------------- |
+|   1   | [main.cpp](./main.cpp)     | solution file                                                     |
 |   2   | [Interactive Problems](./InteractiveProblems) | Instructions for how interactive problems work |
+|   3   | [submittal.cpp](./submittal.cpp) | solution file that has all I/O for test/debugging removed   |
 
 ### Instructions
 
-- This project was accepted by UVA Judge using C++ 11
+- This project was somewhat accepted by UVA Judge using C++ 11
 
 ### Sources
 

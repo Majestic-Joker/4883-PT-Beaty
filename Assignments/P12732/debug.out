@@ -1,80 +1,61 @@
 ==Program Initialized==
 
-How many cases do you want to run? (1-100)Total number of cases is: 1
+How many cases(1-100) do you want to run? 1
 Starting Case: 1
-How many coins are in this case? (3-120)Which coin is heaviest? (1-number of coins)==Testing section: 1==
-
-==chunkSize greater than 1==
+How many coins(3-120) are in this case? 120
+Which coin(1-number of coins) is heaviest? 7
+==Testing section: 1==
 Section Size: 40
 Starting Index: 1
 Test 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 
-If the heavy coin is less than 40 please enter 1
-If the heavy coin is greater than 40 please enter -1
-If the heavy coin is greater than 80 please enter 0
-Starting index is now: 1
-Chunk size is now: 13
-Remainder is now: 1
-==Testing section: 2==
 
-==chunkSize greater than 1==
+If the heavy coin is less than or equal to 40 please enter 1
+If the heavy coin is less than or equal to 80 please enter -1
+If the heavy coin is greater than 80 please enter 0
+1
+
+==Spliting the following into 3 sections==
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 ==Testing section: 2==
 Section Size: 13
 Starting Index: 1
 Test 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 
-If the heavy coin is less than 13 please enter 1
-If the heavy coin is greater than 13 please enter -1
-If the heavy coin is greater than 26 please enter 0
-Starting index is now: 1
-Chunk size is now: 4
-Remainder is now: 1
-==Testing section: 3==
 
-==chunkSize greater than 1==
+If the heavy coin is less than or equal to 13 please enter 1
+If the heavy coin is less than or equal to 26 please enter -1
+If the heavy coin is greater than 26 please enter 0
+1
+
+==Spliting the following into 3 sections==
+1 2 3 4 5 6 7 8 9 10 11 12 13 ==Testing section: 3==
 Section Size: 4
 Starting Index: 1
 Test 1 2 3 4 5 6 7 8 
-If the heavy coin is less than 4 please enter 1
-If the heavy coin is greater than 4 please enter -1
+
+If the heavy coin is less than or equal to 4 please enter 1
+If the heavy coin is less than or equal to 8 please enter -1
 If the heavy coin is greater than 8 please enter 0
-Starting index is now: 5
-Chunk size is now: 1
-Remainder is now: 1
-==Testing section: 4==
+-1
 
-==chunkSize less than or equal to 1==
-==Testing Potential Last Section==
+==Spliting the following into 3 sections==
+5 6 7 8 ==Testing section: 4==
 Section Size: 1
 Starting Index: 5
 Test 5 6 
-If the heavy coin is less than 5 please enter 1
-If the heavy coin is greater than 5 please enter -1
-If the heavy coin is greater than 6 please enter 0
-Section Size: 1
-Starting Index: 5
-Test 5 6 
-If the heavy coin is less than 5 please enter 1
-If the heavy coin is greater than 5 please enter -1
-If the heavy coin is greater than 6 please enter 0
-==Testing section: 5==
 
-==chunkSize less than or equal to 1==
-==Testing Potential Last Section==
-Section Size: 1
-Starting Index: 5
-Test 5 6 
-If the heavy coin is less than 5 please enter 1
-If the heavy coin is greater than 5 please enter -1
+If the heavy coin is less than or equal to 5 please enter 1
+If the heavy coin is less than or equal to 6 please enter -1
 If the heavy coin is greater than 6 please enter 0
-==Testing section: 6==
+0
 
-==chunkSize less than or equal to 1==
-==Testing Potential Last Section==
+==Spliting the following into 3 sections==
+7 8 ==Testing section: 5==
 Section Size: 1
-Starting Index: 5
-Test 5 6 
-If the heavy coin is less than 5 please enter 1
-If the heavy coin is greater than 5 please enter -1
-If the heavy coin is greater than 6 please enter 0
-==Testing section: 7==
+Starting Index: 7
+Test 7 8 
 
-==chunkSize less than or equal to 1==
-==Testing Potential Last Section==
+If the heavy coin is less than or equal to 7 please enter 1
+If the heavy coin is less than or equal to 8 please enter -1
+If the heavy coin is greater than 8 please enter 0
+1
+Answer 7
+Heavy Coin was chosen to be: 7
