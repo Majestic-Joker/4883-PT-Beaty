@@ -1,0 +1,8 @@
+Hello,
+
+I was wondering if there is an issue with problem 12732. I noticed that the most recent accepted solution was in 2015. I'm no stranger to getting wrong answers from the Judge for other problems. However, I doubled checked my algorithm locally for every possible combination since the data set was small enough and found no failures in the algorithm.
+So, I figured I'd check to see if there were any known issues with submitting an interactive problem.
+I'd appreciate any time and assistance you could provide.
+
+Sincerely,
+Joshua Beaty

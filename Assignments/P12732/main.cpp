@@ -17,6 +17,9 @@ bool debugMode = true;
 //when set to true, queries user for test cases instead of server
 bool testing = true;
 
+//when set to true, use randData from file
+bool randData = true;
+
 //ofstreams
 ofstream fout, debug;
 
@@ -42,42 +45,82 @@ void outputLine(string output, bool newLine = false)
 }
 
 //This function checks two sections of equal size based on a starting index.
-void Test(vector<vector<int>> vvi)
+int Test(vector<vector<int>> vvi)
 {
-    if (debugMode)
-        debug << "Section Size: " << vvi[0].size() << "\nStarting Index: " << vvi[0][0] << "\n";
+    if(randData){
+        if (debugMode)
+            debug << "Section Size: " << vvi[0].size() << "\nStarting Index: " << vvi[0][0] << "\n";
 
-    string output = "Test ";
+        string output = "Test ";
 
-    //print out every number for 2 consecutive sections
-    for (int i = 0; i < 2; i++)
-    {
-        for (int j : vvi[i])
+        //print out every number for 2 consecutive sections
+        for (int i = 0; i < 2; i++)
         {
-            output += to_string(j) + " ";
+            for (int j : vvi[i])
+            {
+                output += to_string(j) + " ";
+            }
         }
-    }
-    //print out command 'Test'
-    //flush to send the command to the server
-    if (testing)
+        //print out command 'Test'
+        //flush to send the command to the server
         outputLine(output, true);
-    else
-        cout << output << flush;
+        int randResponse = 0;
+        for (int i = 0; i < 2; i++)
+        {
+            for (int j : vvi[i])
+            {
+                if(j == heavyCoin){
+                    if(i == 0)
+                        randResponse = 1;
+                    else if(i == 1)
+                        randResponse = -1;
+                }
+            }
+        }
+
+        outputLine("Random Response: ");
+        outputLine(to_string(randResponse), true);
+        return randResponse;
+    }
+    else{
+        if (debugMode)
+            debug << "Section Size: " << vvi[0].size() << "\nStarting Index: " << vvi[0][0] << "\n";
+
+        string output = "Test ";
+
+        //print out every number for 2 consecutive sections
+        for (int i = 0; i < 2; i++)
+        {
+            for (int j : vvi[i])
+            {
+                output += to_string(j) + " ";
+            }
+        }
+        //print out command 'Test'
+        //flush to send the command to the server
+        if (testing)
+            outputLine(output, true);
+        else
+            cout << output << flush;
 
 
-    if (testing)
-    {
-        int first = vvi[0].back();
-        int second = vvi[1].back();
-        outputLine("\nIf the heavy coin is less than or equal to ");
-        outputLine(to_string(first));
-        outputLine(" please enter 1", true);
-        outputLine("If the heavy coin is less than or equal to ");
-        outputLine(to_string(second));
-        outputLine(" please enter -1", true);
-        outputLine("If the heavy coin is greater than ");
-        outputLine(to_string(second));
-        outputLine(" please enter 0", true);
+        if (testing)
+        {
+            int first = vvi[0].back();
+            int second = vvi[1].back();
+            outputLine("\nIf the heavy coin is less than or equal to ");
+            outputLine(to_string(first));
+            outputLine(" please enter 1", true);
+            outputLine("If the heavy coin is less than or equal to ");
+            outputLine(to_string(second));
+            outputLine(" please enter -1", true);
+            outputLine("If the heavy coin is greater than ");
+            outputLine(to_string(second));
+            outputLine(" please enter 0", true);
+        }
+      int res = 90;
+      cin >> res;
+      return res;
     }
 }
 
@@ -90,9 +133,11 @@ void splitVector(vector<int> toSplit)
 
         for (int d : toSplit)
             debug << to_string(d) << " ";
+        
+        debug << "\n\n";
     }
 
-    if (toSplit.size() > 3)
+    if (toSplit.size() >= 3)
     {
         //get remainder
         rem = toSplit.size() % 3;
@@ -119,7 +164,6 @@ void splitVector(vector<int> toSplit)
     }
     else{
         //toSplit is 2 or less
-
         //clear coins vector
         coins.clear();
         vector<int> temp = {toSplit[0]};
@@ -135,6 +179,13 @@ int main()
     //Open files
     fout.open("test.out");
     debug.open("debug.out");
+    ofstream ans;
+    //prints out data in the format:
+    //guesses heavyCoins
+    ans.open("OnlyAnswers");
+    ifstream randIn;
+    randIn.open("random.in");
+
 
     if (debugMode)
         debug << "==Program Initialized==\n\n";
@@ -147,7 +198,10 @@ int main()
     }
 
     //read in the number of cases
-    cin >> cases;
+    if(randData)
+        randIn >> cases;
+    else
+        cin >> cases;
 
     if (testing || debugMode)
         outputLine(to_string(cases), true);
@@ -168,7 +222,10 @@ int main()
             while (numCoins < 3 || 120 < numCoins)
             {
                 outputLine("How many coins(3-120) are in this case? ");
-                cin >> numCoins;
+                if(randData)
+                    randIn >> numCoins;
+                else
+                    cin >> numCoins;
             }
         else
             cin >> numCoins;
@@ -184,7 +241,11 @@ int main()
             while (heavyCoin < 0 || heavyCoin > numCoins)
             {
                 outputLine("Which coin(1-number of coins) is heaviest? ");
-                cin >> heavyCoin;
+
+                if(randData)
+                    randIn >> heavyCoin;
+                else
+                    cin >> heavyCoin;
             }
         }
 
@@ -205,6 +266,7 @@ int main()
             coins.push_back(temp);
         }
 
+        //add trailing remainders to the last section
         if (rem != 0)
         {
             vector<int> temp;
@@ -225,8 +287,7 @@ int main()
             //into 3 chunks, and query the server for a result
             int response = -99;
 
-            Test(coins);
-            cin >> response;
+            response = Test(coins);
 
             outputLine(to_string(response), true);
 
@@ -238,6 +299,16 @@ int main()
             case -1:
                 //right is heavy
                 tempV = coins[1];
+
+                if (debugMode)
+                {
+                    debug << "\n==contents of tempV==\n";
+
+                    for (int d : tempV)
+                        debug << to_string(d) << " ";
+                    
+                    debug << "\n\n";
+                }
 
                 if (tempV.size() > 1)
                 {
@@ -255,6 +326,16 @@ int main()
                 //sides are even
                 tempV = coins[2];
 
+                if (debugMode)
+                {
+                    debug << "\n==contents of tempV==\n";
+
+                    for (int d : tempV)
+                        debug << to_string(d) << " ";
+                    
+                    debug << "\n\n";
+                }
+
                 if (tempV.size() > 1)
                 {
                     //Split section into 3 sets and recheck
@@ -269,6 +350,16 @@ int main()
             case 1:
                 //left is heavy
                 tempV = coins[0];
+
+                if (debugMode)
+                {
+                    debug << "\n==contents of tempV==\n";
+
+                    for (int d : tempV)
+                        debug << to_string(d) << " ";
+                    
+                    debug << "\n\n";
+                }
 
                 if (tempV.size() > 1)
                 {
@@ -292,6 +383,7 @@ int main()
         {
             outputLine("Answer ");
             outputLine(to_string(fakeCoin), true);
+            ans << fakeCoin << " ";
         }
         else
         {
@@ -302,10 +394,14 @@ int main()
         {
             outputLine("Heavy Coin was chosen to be: ");
             outputLine(to_string(heavyCoin), true);
+            ans << heavyCoin << '\n';
         }
+        coins.clear();
     }
 
     fout.close();
     debug.close();
+    ans.close();
+    randIn.close();
     return 0;
 }
