@@ -61,7 +61,7 @@ My initial plan is to build a struct to hold team information and use a probably
 
 ### Instructions
 
-- This project was accepted by UVA Judge using C++ 11
+- 
 
 ### Sources
 
