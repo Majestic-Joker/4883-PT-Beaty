@@ -38,4 +38,4 @@ Since the number is so small, we just use Vector of long long ints for each valu
 
 ### Sources
 
-- None needed, mostly just an iterative approach to the fibonacci sequence.
+- None needed, just a lookup table problem.
