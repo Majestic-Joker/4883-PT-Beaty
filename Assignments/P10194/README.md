@@ -58,11 +58,12 @@ My initial plan is to build a struct to hold team information and use a probably
 |   1   | [main.cpp](./main.cpp)     | solution file                                              |
 |   2   | [input](./input)           | Test input file from problem statement                     |
 |   3   | [input2](./input2)         | Larger test input from udebug user S6068                   |
+|   4   | [input3](./input3)         | Larger test input from udebug user Morass                  |
 
 ### Instructions
 
-- 
+- Solution accepted by UVA Online Judge using C++11
 
 ### Sources
 
-- None so far
+- [Maps](./https://www.geeksforgeeks.org/map-associative-containers-the-c-standard-template-library-stl/) for setting up and accessing maps.
