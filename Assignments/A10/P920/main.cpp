@@ -10,32 +10,13 @@
 #include<string>
 #include<map>
 #include<vector>
+#include<algorithm>
+#include<math.h>
+#include<iomanip>
 
 using namespace std;
 
-struct SlopedLine{
-    pair<double,double> c1;
-    pair<double,double> c2;
-    double slope;
-    double yIntercept;
-    double length;
-
-    SlopedLine(){
-        c1 = {0.0,0.0};
-        c2 = {0.0,0.0};
-        slope = 0.0;
-        yIntercept = 0.0;
-        length = 0.0;
-    }
-    
-    SlopedLine(pair<double, double> coord1, pair<double,double> coord2){
-        c1 = coord1;
-        c2 = coord2;
-        slope = (coord2.second-coord1.second)/(coord2.first-coord1.first);  // m = (y2-y1)/(x2-x1)
-        yIntercept = coord1.second-(slope*coord1.first);                    // b = y1-(m*x1)
-        length = sqrt(((coord2.second-coord1.second)*(coord2.second-coord1.second))+((coord2.first-coord1.first)*(coord2.first-coord1.first)));                                                       // length = rise + run; where a^2 + b^2 = c^2, 
-    }
-}
+double lineLength(pair<double,double>, pair<double,double>);
 
 //when set to true, prints debug messages to debug.out file
 bool debugMode = false;
@@ -55,11 +36,11 @@ int main(){
         //read number of points
         int points;
         cin >> points;
-        map<double, double> pointMap;
+        map<double,double> pointMap;
 
         while(points--){
             //create temporary x and y values
-            int tempX, tempY;
+            double tempX, tempY;
             //read into the temporary values
             cin >> tempX >> tempY;
             //slap the values into the map of points, auto sorted by X
@@ -67,27 +48,33 @@ int main(){
         }
 
         // now we create a vector of sloped lines based on the X sorted map of points
-        vector<SlopedLine*> lines;
-        for(pair<double, double> it = pointMap.begin(); it != pointMap.end(); it++){
-            pair<double, double> trash = it;
-            pair<double, double> current = trash;
-            trash++;
-            pair<double, double> next = trash;
+        vector<pair<double,double>> coordinates;
+        for(auto it = pointMap.begin(); it != pointMap.end(); it++){
+            pair<double, double> temp;
+            temp.first = it->first;
+            temp.second = it->second;
 
-            //create a temporary SlopedLine pointer and put it on the vector of lines
-            SlopedLine* temp = new SlopedLine(current, next);
-            lines.push_back(temp);
+            coordinates.push_back(temp);
+        }
+
+        int i = coordinates.size()-2;
+        double answer = 0;
+        double last = 0;
+        while(i >= 0){
+            if(coordinates[i].second > last){
+                pair<double, double> temp;
+                temp.first = coordinates[i].first+(coordinates[i+1].first - coordinates[i].first)*(last - coordinates[i].second)/(coordinates[i+1].second-coordinates[i].second);
+                temp.second = last;
+                
+                answer += lineLength(temp, coordinates[i]);
+
+                last = coordinates[i].second;
+            }
+            i--;
         }
         
-        vector<int> eraseables;
-        //go through the vector of lines and remove the ones that have a positive slope
-        for(int a = 0; a < lines.size(); a++){
-            if(lines[a].slope >= 0)
-                eraseables.push_back(a);
-        }
-        for(int b = 0; b < eraseables.size(); b++){
-            lines.erase(lines.begin()+eraseables[b]-b);
-        }
+        cout << fixed << setprecision(2) << answer << "\n";
+        //fout << fixed << setprecision(2) << answer << "\n";
     }
 
     //close files
@@ -96,4 +83,8 @@ int main(){
 
     //end program
     return 0;
-} 
+}
+
+double lineLength(pair<double,double> a, pair<double,double> b){
+    return sqrt((a.first-b.first)*(a.first-b.first)+(a.second-b.second)*(a.second-b.second));
+}
