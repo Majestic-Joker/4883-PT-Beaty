@@ -14,7 +14,7 @@
 | 10  | [A10](./A10)        | Solve UVA problems 900 - Brick Wall Patterns and 920 Sunny Mountains |
 | 11  | [A11](./A11/P108)   | Solve UVA problem 108 - Maximum Sum                                  |
 | 12  | [A13](./A13/P1112)  | Solve UVA problem 1112 - Mice and Maze                               |
-| 13  | [A14](./A14)        | Solve UVA problems 11080 - Place the Guards                          |
-| 14  | [A15](./A15/P12732) | Solve UVA problem 11080 - Place the Guards                           |
-| 15  | [A16](./A16)        | Solve UVA problem 11080 - Place the Guards                           |
-| 16  | [A17](./A17)        | Solve UVA problem 11080 - Place the Guards                           |
+| 13  | [A14](./A14)        | Pick 3 problems from the list and solve them                         |
+| 14  | [A15](./A15/P12732) | Pick a problem, solve it, and present it                             |
+| 15  | [A16](./A16)        | Write a program that compares various sorts                          |
+| 16  | [A17](./A17/P112)   | Solve UVA problem 112 - Tree Summing                                 |
