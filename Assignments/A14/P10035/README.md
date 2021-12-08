@@ -38,5 +38,4 @@ problems so that educators may assess their difficulty.
 
 ### Sources
 
-- [Dijkstra's Algorithm](https://www.geeksforgeeks.org/dijkstras-shortest-path-algorithm-using-priority_queue-stl/)
-  from Geeks for Geeks used to calculate the shortest path from the exit.
+- None needed.
